@@ -1,0 +1,9 @@
+Q1)
+Ans:
+Yes, the DATE datatype is recognized by ANSI.
+
+Q2)
+Ans:
+Data Manipulation Language (DML) subdivision is used to insert values in table.
+eg. INSERT into <tablename>
+values(<values for respective columns>);
