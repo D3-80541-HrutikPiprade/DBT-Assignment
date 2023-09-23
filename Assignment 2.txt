@@ -1,0 +1,17 @@
+Q1)
+Ans:
+Cnum field of the CUSTOMERS table is the primary key.
+
+Q2)
+Ans:
+Rating is the 4th column of the CUSTOMERS table.
+
+Q3)
+Ans:
+In RDBMS, Row is also called as 'Tuple' and 'Entity'. Columns are also called as 'Attribute'.
+
+Q4)
+Ans:
+It is not possible to see the first five rows because, when we insert a row in MySQL table, MySQL stores the row wherever it finds the free space,this is to speed up the INSERT statement.
+therefore, the rows are not stored sequentially but they are stored ranndomly wherever freespace available. Hence we cannot see the first and last N rows.
+
