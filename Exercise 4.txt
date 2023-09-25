@@ -1,0 +1,142 @@
+Q1)
+
+Select min(Status) from S;
++-------------+
+| min(Status) |
++-------------+
+|          10 |
++-------------+
+1 row in set (0.04 sec)
+
+Q2)
+
+Select max(Weight) from P;
++-------------+
+| max(Weight) |
++-------------+
+|          19 |
++-------------+
+1 row in set (0.00 sec)
+
+
+Q3)
+
+select avg(Weight) from P;
++-------------+
+| avg(Weight) |
++-------------+
+|     15.1667 |
++-------------+
+1 row in set (0.00 sec)
+
+Q4)
+
+select sum(Qty) from SPJ
+    -> where `P#` ='P1';
++----------+
+| sum(Qty) |
++----------+
+|     1000 |
++----------+
+1 row in set (0.00 sec)
+
+
+Q5)
+
+select `P#`, sum(Qty) from SPJ group by `P#`;
++------+----------+
+| P#   | sum(Qty) |
++------+----------+
+| P1   |     1000 |
+| P3   |     3500 |
+| P5   |     1100 |
+| P4   |     1300 |
+| P6   |     1300 |
+| P2   |      300 |
++------+----------+
+6 rows in set (0.00 sec)
+
+Q6)
+
+select `P#`, avg(Qty) from SPJ group by `P#`;
++------+----------+
+| P#   | avg(Qty) |
++------+----------+
+| P1   | 333.3333 |
+| P3   | 388.8889 |
+| P5   | 275.0000 |
+| P4   | 650.0000 |
+| P6   | 325.0000 |
+| P2   | 150.0000 |
++------+----------+
+6 rows in set (0.01 sec)
+
+
+Q7)
+
+select `P#`, max(Qty) from SPJ
+    -> group by `P#`
+    -> having max(Qty)>800;
+Empty set (0.00 sec)
+
+
+Q8)
+
+select Status, Count(`S#`) from S
+    -> group by Status
+    -> order by Status;
++--------+-------------+
+| Status | Count(`S#`) |
++--------+-------------+
+|     10 |           1 |
+|     20 |           2 |
+|     30 |           2 |
++--------+-------------+
+3 rows in set (0.00 sec)
+
+
+Q9)
+
+Select City, count(`J#`) from J
+    -> group by City;
++--------+-------------+
+| City   | count(`J#`) |
++--------+-------------+
+| Paris  |           1 |
+| Rome   |           1 |
+| Athens |           2 |
+| London |           2 |
+| Oslo   |           1 |
++--------+-------------+
+5 rows in set (0.27 sec)
+
+
+Q10)
+
+The difference between the COUNT(Status) and COUNT(*) is
+COUNT(Status) returns the total number of rows having Status value is not null.
+COUNT(*) returns the total number of rows by passing the address of each row to the Server RAM.
+
+
+Q11)
+
+select 
+    -> case 
+    -> when Status = 10 then 'Ten' 
+    -> when Status = 20 then 'Twenty' 
+    -> When Status = 30 then 'Thirty' 
+    -> end "Status", count(`S#`) Count 
+    -> from S 
+    -> group by Status 
+    -> order by Count;
++--------+-------+
+| Status | Count |
++--------+-------+
+| Ten    |     1 |
+| Twenty |     2 |
+| Thirty |     2 |
++--------+-------+
+3 rows in set, 1 warning (0.00 sec)
+
+
+
