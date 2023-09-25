@@ -1,0 +1,83 @@
+Q1)
+
+select count(*) from ORDERS
+    -> WHERE Odate= '1990-10-03';
++----------+
+| count(*) |
++----------+
+|        5 |
++----------+
+1 row in set (0.06 sec)
+
+
+Q2)
+
+select count(distinct City) from CUSTOMERS;
++----------------------+
+| count(distinct City) |
++----------------------+
+|                    4 |
++----------------------+
+1 row in set (0.06 sec)
+
+
+Q3)
+
+select Cnum, min(Amt) from ORDERS
+    -> group by Cnum
+    -> order by Cnum;
++------+----------+
+| Cnum | min(Amt) |
++------+----------+
+| 2001 |   767.19 |
+| 2002 |  1713.23 |
+| 2003 |  5160.45 |
+| 2004 |    75.75 |
+| 2006 |  4723.00 |
+| 2007 |  1900.10 |
+| 2008 |    18.69 |
++------+----------+
+7 rows in set (0.01 sec)
+
+
+Q4)
+
+SELECT Cname from CUSTOMERS
+    -> where Cname like 'G%' limit 1;
++----------+
+| Cname    |
++----------+
+| Giovanni |
++----------+
+1 row in set (0.00 sec)
+
+Q5)
+
+SELECT City,Max(rating) from CUSTOMERS
+    -> Group by City;
++----------+-------------+
+| City     | Max(rating) |
++----------+-------------+
+| London   |         100 |
+| Rome     |         200 |
+| San Jose |         300 |
+| Berlin   |         300 |
++----------+-------------+
+4 rows in set (0.00 sec)
+
+
+Q6)
+
+select Odate, count(distinct Snum) from ORDERS group by Odate;
++------------+----------------------+
+| Odate      | count(distinct Snum) |
++------------+----------------------+
+| 1990-10-03 |                    4 |
+| 1990-10-04 |                    2 |
+| 1990-10-05 |                    1 |
+| 1990-10-06 |                    2 |
++------------+----------------------+
+4 rows in set (0.00 sec)
+
+
+

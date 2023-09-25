@@ -1,0 +1,65 @@
+Q1)
+
+Select Onum,Snum, Amt*0.12 Commission from ORDERS;
++------+------+------------+
+| Onum | Snum | Commission |
++------+------+------------+
+| 3001 | 1007 |       2.24 |
+| 3003 | 1001 |      92.06 |
+| 3002 | 1004 |     228.01 |
+| 3005 | 1002 |     619.25 |
+| 3006 | 1007 |     131.78 |
+| 3009 | 1003 |     205.59 |
+| 3007 | 1002 |       9.09 |
+| 3008 | 1001 |     566.76 |
+| 3010 | 1002 |     157.19 |
+| 3011 | 1001 |    1187.03 |
++------+------+------------+
+10 rows in set (0.00 sec)
+
+Q2)
+
+select concat(concat(concat('For the City',City),', the highest rating is : ') , max(Rating)) Rating from CUSTOMERS GROUP BY City;
++---------------------------------------------------+
+| Rating                                            |
++---------------------------------------------------+
+| For the CityLondon, the highest rating is : 100   |
+| For the CityRome, the highest rating is : 200     |
+| For the CitySan Jose, the highest rating is : 300 |
+| For the CityBerlin, the highest rating is : 300   |
++---------------------------------------------------+
+4 rows in set (0.00 sec)
+
+Q3)
+
+Select Rating, Cname, Cnum from CUSTOMERS
+    -> order by Rating desc;
++--------+----------+------+
+| Rating | Cname    | Cnum |
++--------+----------+------+
+|    300 | Grass    | 2004 |
+|    300 | Cisneros | 2008 |
+|    200 | Giovanni | 2002 |
+|    200 | Liu      | 2003 |
+|    100 | Hoffman  | 2001 |
+|    100 | Clemens  | 2006 |
+|    100 | Pereira  | 2007 |
++--------+----------+------+
+7 rows in set (0.00 sec)
+
+
+Q4)
+
+
+Select Odate, sum(Amt) "Total Amount" from ORDERS group by Odate order by 2 desc;
++------------+--------------+
+| Odate      | Total Amount |
++------------+--------------+
+| 1990-10-06 |     11201.83 |
+| 1990-10-03 |      8944.59 |
+| 1990-10-05 |      4723.00 |
+| 1990-10-04 |      1788.98 |
++------------+--------------+
+4 rows in set (0.00 sec)
+
+
