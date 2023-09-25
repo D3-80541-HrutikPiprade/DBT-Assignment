@@ -1,0 +1,149 @@
+Q1)
+
+Select Sname from S
+    -> where ascii(Sname) between 65 and 90;
++-------+
+| Sname |
++-------+
+| Smith |
+| Jones |
+| Blake |
+| Clark |
+| Adams |
++-------+
+5 rows in set (0.27 sec)
+
+
+Q2)
+
+Select upper(Sname) from S;
++--------------+
+| upper(Sname) |
++--------------+
+| SMITH        |
+| JONES        |
+| BLAKE        |
+| CLARK        |
+| ADAMS        |
++--------------+
+5 rows in set (0.00 sec)
+
+
+Q3)
+
+Select lower(Sname) from S;
++--------------+
+| lower(Sname) |
++--------------+
+| smith        |
+| jones        |
+| blake        |
+| clark        |
+| adams        |
++--------------+
+5 rows in set (0.00 sec)
+
+
+Q4)
+
+Select lpad(Sname,25,' ')"Supplier's Name" from S;
++---------------------------+
+| Supplier's Name           |
++---------------------------+
+|                     Smith |
+|                     Jones |
+|                     Blake |
+|                     Clark |
+|                     Adams |
++---------------------------+
+5 rows in set (0.00 sec)
+
+Q5)
+
+Select replace(Sname,'la','ro') from S;
++--------------------------+
+| replace(Sname,'la','ro') |
++--------------------------+
+| Smith                    |
+| Jones                    |
+| Broke                    |
+| Crork                    |
+| Adams                    |
++--------------------------+
+5 rows in set (0.00 sec)
+
+
+Q6)
+
+Select replace(replace(Sname,'l','r'),'a','o')"Supplier's Name"
+from S;
++-----------------+
+| Supplier's Name |
++-----------------+
+| Smith           |
+| Jones           |
+| Broke           |
+| Crork           |
+| Adoms           |
++-----------------+
+5 rows in set (0.00 sec)
+
+
+Q7)
+
+Select Sname, length(Sname) "Length" from S;
++-------+--------+
+| Sname | Length |
++-------+--------+
+| Smith |      5 |
+| Jones |      5 |
+| Blake |      5 |
+| Clark |      5 |
+| Adams |      5 |
++-------+--------+
+5 rows in set (0.00 sec)
+
+Q8)
+
+
+Select Sname from S
+    -> Where soundex(Sname) = soundex('Bloke');
++-------+
+| Sname |
++-------+
+| Blake |
++-------+
+1 row in set (0.00 sec)
+
+
+Q9)
+
+select Sname, replace(replace(replace(Status,10,'Ten'),20,'Twenty'),30,'Thirty')Status from S;
++-------+--------+
+| Sname | Status |
++-------+--------+
+| Smith | Twenty |
+| Jones | Ten    |
+| Blake | Thirty |
+| Clark | Twenty |
+| Adams | Thirty |
++-------+--------+
+5 rows in set (0.00 sec)
+
+
+10)
+
+select dayname(sysdate()) Day from dual;
++--------+
+| Day    |
++--------+
+| Sunday |
++--------+
+1 row in set (0.00 sec)
+
+
+
+
+
+
+
