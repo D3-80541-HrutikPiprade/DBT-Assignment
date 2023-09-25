@@ -1,0 +1,302 @@
+Q1)
+
+create table SEMP 
+( 
+Empno char(4), 
+Empname char(20), 
+Basic Float, 
+Deptno char(2), 
+Depthead char(4) 
+);
+Query OK, 0 rows affected (1.00 sec)
+
+
+Q2)
+
+create table SDEPT
+    -> (
+    -> Deptno char(2),
+    -> Deptname char(15)
+    -> );
+    
+Q3)
+
+insert into SDEPT(Deptno,Deptname) values 
+(10,'Development'), 
+(20,'Training');
+Query OK, 2 rows affected (0.33 sec)
+
+
+Q4)
+
+insert into SEMP (Empno,Empname,Basic,Deptno) values
+    -> (0001,'SUNIL',6000,10),
+    -> (0002,'HIREN',8000,20);
+Query OK, 2 rows affected (0.32 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+
+insert into SEMP (Empno,Empname,Basic,Deptno,Depthead) values 
+    -> (0003,'ALI',4000,10,0001),
+    -> (0004,'GEORGE',6000,null,0002);
+Query OK, 2 rows affected (0.39 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+create table S 
+    -> (
+    -> `S#` char(5),
+    -> Sname char(20),
+    -> Status int,
+    -> City char(15)
+    -> );
+Query OK, 0 rows affected (0.77 sec)
+
+insert into S (`S#`,Sname,Status,City) values
+    -> ('S1','Smith',20,'London'),
+    -> ('S2','Jones',10,'Paris'),
+    -> ('S3','Blake',30,'Paris'),
+    -> ('S4','Clark',20,'London'),
+    -> ('S5','Adams',30,'Athens');
+Query OK, 5 rows affected (0.38 sec)
+Records: 5  Duplicates: 0  Warnings:  0
+
+create table P
+    -> (
+    -> `P#` char(6),
+    -> Pname char(20),
+    -> Color char(6),
+    -> Weight int,
+    -> City char(15)
+    -> );
+Query OK, 0 rows affected (0.66 sec)
+
+insert into P (`P#`,Pname,Color,Weight,City) values ('P1','Nut','Red',12,'London'), 
+('P2','Bolt','Green',17,'Paris'), 
+('P3','Screw','Blue',17,'Rome'), 
+('P4','Screw','Red',14,'London'), 
+('P5','Cam','Blue',12,'Paris'), 
+('P6','Cog','Red',19,'London');
+Query OK, 6 rows affected (0.11 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+
+create table J
+    -> (
+    -> `J#` char(4),
+    -> Jname char(10),
+    -> City char(15)
+    -> );
+Query OK, 0 rows affected (1.24 sec)
+
+
+insert into J (`J#`,Jname,City) values
+    -> ('J1','Sorter','Paris'),
+    -> ('J2','Punch','Rome'),
+    -> ('J3','Reader','Athens'),
+    -> ('J4','Console','Athens'),
+    -> ('J5','Collator','London'),
+    -> ('J6','Terminal','Oslo'),
+    -> ('J7','Tape','London');
+Query OK, 7 rows affected (0.34 sec)
+Records: 7  Duplicates: 0  Warnings: 0
+
+create table SPJ
+    -> (
+    -> `S#`char(4),
+    -> `P#` char(4),
+    -> `J#` char(4),
+    -> QTY int
+    -> );
+Query OK, 0 rows affected (1.24 sec)
+
+
+insert into SPJ(`S#`,`P#`,`J#`,Qty) values
+    -> ('S1','P1','J1',200),
+    -> ('S1','P1','J4',700),
+    -> ('S2','P3','J1',400),
+    -> ('S2','P3','J2',200),
+    -> ('S2','P3','J3',200),
+    -> ('S2','P3','J4',500),
+    -> ('S2','P3','J5',600),
+    -> ('S2','P3','J6',400),
+    -> ('S2','P3','J7',800),
+    -> ('S2','P5','J2',100),
+    -> ('S3','P3','J1',200),
+    -> ('S3','P4','J2',500),
+    -> ('S4','P6','J3',300),
+    -> ('S4','P6','J7',300),
+    -> ('S5','P2','J2',200),
+    -> ('S5','P2','J4',100),
+    -> ('S5','P5','J5',500),
+    -> ('S5','P5','J7',100),
+    -> ('S5','P6','J2',200),
+    -> ('S5','P1','J4',100),
+    -> ('S5','P3','J4',200),
+    -> ('S5','P4','J4',800),
+    -> ('S5','P5','J4',400),
+    -> ('S5','P6','J4',500);
+Query OK, 24 rows affected (0.13 sec)
+Records: 24  Duplicates: 0  Warnings: 0
+
+
+Q5)
+
+select * from S;
++------+-------+--------+--------+
+| S#   | Sname | Status | City   |
++------+-------+--------+--------+
+| S1   | Smith |     20 | London |
+| S2   | Jones |     10 | Paris  |
+| S3   | Blake |     30 | Paris  |
+| S4   | Clark |     20 | London |
+| S5   | Adams |     30 | Athens |
++------+-------+--------+--------+
+5 rows in set (0.01 sec)
+
+Q6)
+
+select `S#`, Sname from S;
++------+-------+
+| S#   | Sname |
++------+-------+
+| S1   | Smith |
+| S2   | Jones |
+| S3   | Blake |
+| S4   | Clark |
+| S5   | Adams |
++------+-------+
+5 rows in set (0.00 sec)
+
+Q7)
+
+select Pname, Color from P
+    -> where City = 'London';
++-------+-------+
+| Pname | Color |
++-------+-------+
+| Nut   | Red   |
+| Screw | Red   |
+| Cog   | Red   |
++-------+-------+
+3 rows in set (0.00 sec)
+
+
+Q8)
+
+select * from S
+    -> where City = 'London';
++------+-------+--------+--------+
+| S#   | Sname | Status | City   |
++------+-------+--------+--------+
+| S1   | Smith |     20 | London |
+| S4   | Clark |     20 | London |
++------+-------+--------+--------+
+2 rows in set (0.00 sec)
+
+
+Q9)
+
+select * from S
+    -> where City = 'Paris' or City = 'Athens';
++------+-------+--------+--------+
+| S#   | Sname | Status | City   |
++------+-------+--------+--------+
+| S2   | Jones |     10 | Paris  |
+| S3   | Blake |     30 | Paris  |
+| S5   | Adams |     30 | Athens |
++------+-------+--------+--------+
+3 rows in set (0.00 sec)
+
+
+Q10)
+
+
+select * from J 
+    -> where City = 'Athens';
++------+---------+--------+
+| J#   | Jname   | City   |
++------+---------+--------+
+| J3   | Reader  | Athens |
+| J4   | Console | Athens |
++------+---------+--------+
+2 rows in set (0.00 sec)
+
+Q11)
+
+select Pname, Weight from P
+    -> where Weight between 12 and 14;
++-------+--------+
+| Pname | Weight |
++-------+--------+
+| Nut   |     12 |
+| Screw |     14 |
+| Cam   |     12 |
++-------+--------+
+3 rows in set (0.00 sec)
+
+
+Q12)
+
+select * from S
+    -> where Status >= 20;
++------+-------+--------+--------+
+| S#   | Sname | Status | City   |
++------+-------+--------+--------+
+| S1   | Smith |     20 | London |
+| S3   | Blake |     30 | Paris  |
+| S4   | Clark |     20 | London |
+| S5   | Adams |     30 | Athens |
++------+-------+--------+--------+
+4 rows in set (0.00 sec)
+
+
+Q13)
+
+select * from S
+    -> where City != 'London';
++------+-------+--------+--------+
+| S#   | Sname | Status | City   |
++------+-------+--------+--------+
+| S2   | Jones |     10 | Paris  |
+| S3   | Blake |     30 | Paris  |
+| S5   | Adams |     30 | Athens |
++------+-------+--------+--------+
+3 rows in set (0.00 sec)
+
+Q14)
+
+Select distinct City from S;
++--------+
+| City   |
++--------+
+| London |
+| Paris  |
+| Athens |
++--------+
+3 rows in set (0.27 sec)
+
+
+Q15)
+
+select Pname, Weight GRAMS, Weight*1000 MILLIGRAMS, Weight/1000 KILOGRAMS from P;
++-------+-------+------------+-----------+
+| Pname | GRAMS | MILLIGRAMS | KILOGRAMS |
++-------+-------+------------+-----------+
+| Nut   |    12 |      12000 |    0.0120 |
+| Bolt  |    17 |      17000 |    0.0170 |
+| Screw |    17 |      17000 |    0.0170 |
+| Screw |    14 |      14000 |    0.0140 |
+| Cam   |    12 |      12000 |    0.0120 |
+| Cog   |    19 |      19000 |    0.0190 |
++-------+-------+------------+-----------+
+6 rows in set (0.05 sec)
+
+
+
+
+
+
+
+
+
+
