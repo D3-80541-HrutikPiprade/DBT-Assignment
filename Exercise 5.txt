@@ -1,0 +1,179 @@
+Q1)
+
+select Sname, sum(Qty) from SPJ,S where S.`S#`=SPJ.`S#` group by
+ Sname;
++-------+----------+
+| Sname | sum(Qty) |
++-------+----------+
+| Smith |      900 |
+| Jones |     3200 |
+| Blake |      700 |
+| Clark |      600 |
+| Adams |     3100 |
++-------+----------+
+5 rows in set (0.29 sec)
+
+Q2)
+
+select Pname, sum(Qty) from SPJ,P where P.`P#`=SPJ.`P#` group by
+ Pname;
++-------+----------+
+| Pname | sum(Qty) |
++-------+----------+
+| Nut   |     1000 |
+| Screw |     4800 |
+| Cam   |     1100 |
+| Cog   |     1300 |
+| Bolt  |      300 |
++-------+----------+
+5 rows in set (0.04 sec)
+
+Q3)
+
+select Jname, sum(Qty) from SPJ,J where J.`J#`=SPJ.`J#` group by
+ Jname;
++----------+----------+
+| Jname    | sum(Qty) |
++----------+----------+
+| Sorter   |      800 |
+| Console  |     3300 |
+| Punch    |     1200 |
+| Reader   |      500 |
+| Collator |     1100 |
+| Terminal |      400 |
+| Tape     |     1200 |
++----------+----------+
+7 rows in set (0.27 sec)
+
+Q4)
+
+select Sname,Pname,Jname,Qty from SPJ,J,P,S where SPJ.`S#` = S.`S#` and SPJ.`P#` = P.`P#` and SPJ.`J#` = J.`J#`;
++-------+-------+----------+------+
+| Sname | Pname | Jname    | Qty  |
++-------+-------+----------+------+
+| Jones | Screw | Sorter   |  400 |
+| Blake | Screw | Sorter   |  200 |
+| Smith | Nut   | Sorter   |  200 |
+| Adams | Cog   | Punch    |  200 |
+| Jones | Cam   | Punch    |  100 |
+| Blake | Screw | Punch    |  500 |
+| Jones | Screw | Punch    |  200 |
+| Adams | Bolt  | Punch    |  200 |
+| Clark | Cog   | Reader   |  300 |
+| Jones | Screw | Reader   |  200 |
+| Adams | Cog   | Console  |  500 |
+| Adams | Cam   | Console  |  400 |
+| Adams | Screw | Console  |  800 |
+| Jones | Screw | Console  |  500 |
+| Adams | Screw | Console  |  200 |
+| Adams | Bolt  | Console  |  100 |
+| Smith | Nut   | Console  |  700 |
+| Adams | Nut   | Console  |  100 |
+| Adams | Cam   | Collator |  500 |
+| Jones | Screw | Collator |  600 |
+| Jones | Screw | Terminal |  400 |
+| Clark | Cog   | Tape     |  300 |
+| Adams | Cam   | Tape     |  100 |
+| Jones | Screw | Tape     |  800 |
++-------+-------+----------+------+
+24 rows in set (0.01 sec)
+
+
+
+Q5)
+
+select Sname from SPJ,J,S where SPJ.`S#`=S.`S#`and SPJ.`J#`=J.`J#` and S.City=J.City group by Sname;
++-------+
+| Sname |
++-------+
+| Jones |
+| Blake |
+| Clark |
+| Adams |
++-------+
+4 rows in set (0.01 sec)
+
+
+Q6)
+
+
+select Pname, sum(Qty) from SPJ,P 
+    -> where SPJ.`P#`=P.`P#` and P.Color ='Red'
+    -> group by Pname;
++-------+----------+
+| Pname | sum(Qty) |
++-------+----------+
+| Nut   |     1000 |
+| Screw |     1300 |
+| Cog   |     1300 |
++-------+----------+
+3 rows in set (0.00 sec)
+
+Q7)
+
+select Status, sum(Qty) from SPJ, S  where SPJ.`S#`=S.`S#` and S.Status =20
+    -> group by S.`S#`;
++--------+----------+
+| Status | sum(Qty) |
++--------+----------+
+|     20 |      900 |
+|     20 |      600 |
++--------+----------+
+2 rows in set (0.00 sec)
+
+
+Q8)
+
+select Pname, sum(Qty) from SPJ, P  where SPJ.`P#`=P.`P#` and P.Weight >14 group by Pname;
++-------+----------+
+| Pname | sum(Qty) |
++-------+----------+
+| Screw |     3500 |
+| Cog   |     1300 |
+| Bolt  |      300 |
++-------+----------+
+3 rows in set (0.00 sec)
+
+
+Q9)
+
+select Jname, City from SPJ,J where J.`J#`=SPJ.`J#` group by Jname,City having sum(Qty)>500;
++----------+--------+
+| Jname    | City   |
++----------+--------+
+| Sorter   | Paris  |
+| Console  | Athens |
+| Punch    | Rome   |
+| Collator | London |
+| Tape     | London |
++----------+--------+
+5 rows in set (0.00 sec)
+
+Q10)
+
+Select a.Ename, b.Ename Manager from emp a, emp b where b.Empno=a.mgr;
++--------+---------+
+| Ename  | Manager |
++--------+---------+
+| FORD   | JONES   |
+| SCOTT  | JONES   |
+| JAMES  | BLAKE   |
+| TURNER | BLAKE   |
+| MARTIN | BLAKE   |
+| WARD   | BLAKE   |
+| ALLEN  | BLAKE   |
+| MILLER | CLARK   |
+| ADAMS  | SCOTT   |
+| CLARK  | KING    |
+| BLAKE  | KING    |
+| JONES  | KING    |
+| SMITH  | FORD    |
++--------+---------+
+13 rows in set (0.00 sec)
+
+
+
+
+
+
+
