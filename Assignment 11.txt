@@ -1,0 +1,33 @@
+Q1)
+
+select a.Sname,b.Sname ,a.City from SALESPEOPLE a, SALESPEOPLE b where a.City=b.City and a.Snum>b.Snum;
++--------+-------+--------+
+| Sname  | Sname | City   |
++--------+-------+--------+
+| Motika | Peel  | London |
++--------+-------+--------+
+1 row in set (0.00 sec)
+
+Q2)
+
+Select Cname, Rating from CUSTOMERS, ORDERS WHERE CUSTOMERS.Cnum = ORDERS.Cnum and Amt >  (select avg(Amt) from ORDERS) ;
++---------+--------+
+| Cname   | Rating |
++---------+--------+
+| Liu     |    200 |
+| Clemens |    100 |
+| Clemens |    100 |
++---------+--------+
+3 rows in set (0.00 sec)
+
+Q3)
+
+select Snum, sum(Amt) from ORDERS group by Snum having sum(Amt)> (select max(Amt) from ORDERS);
++------+----------+
+| Snum | sum(Amt) |
++------+----------+
+| 1001 | 15382.07 |
++------+----------+
+1 row in set (0.00 sec)
+
+
