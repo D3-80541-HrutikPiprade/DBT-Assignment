@@ -1,0 +1,33 @@
+Q1)
+
+insert into SALESPEOPLE ( City, Sname , Comm, Snum)
+    -> values('San Jose', 'Blanco',null,1100);
+Query OK, 1 row affected (0.39 sec)
+
+Q2)
+
+delete from ORDERS
+    -> where Cnum=
+    -> (select Cnum from CUSTOMERS
+    -> where Cname = 'Clemens');
+Query OK, 2 rows affected (0.37 sec)
+
+Q3)
+
+update CUSTOMERS
+    -> set Rating= Rating+ 100
+    -> where City='Rome';
+Query OK, 2 rows affected (0.50 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+Q4)
+
+update CUSTOMERS 
+set Snum = 
+(select Snum from SALESPEOPLE 
+Where Sname = 'Motika') 
+Where Snum =  
+(Select Snum from SALESPEOPLE
+where Sname = 'Serres');
+Query OK, 2 rows affected (0.10 sec)
+Rows matched: 2  Changed: 2  Warnings: 0

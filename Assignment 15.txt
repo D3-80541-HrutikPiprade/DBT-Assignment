@@ -1,0 +1,32 @@
+Q1)
+
+Create table Multicust 
+    -> as 
+    -> select * from SALESPEOPLE 
+    -> where Snum = any 
+    -> (select Snum from CUSTOMERS 
+    -> group by Snum 
+    -> having count(Snum)>1);
+Query OK, 2 rows affected, 1 warning (1.40 sec)
+Records: 2  Duplicates: 0  Warnings: 1
+
+
+Q2)
+
+delete from CUSTOMERS
+    -> where not exists
+    -> (select Cnum from ORDERS);
+Query OK, 0 rows affected (0.00 sec)
+
+Q3)
+
+update SALESPEOPLE
+    -> set Comm= Comm *1.2
+    -> where Snum = any
+    -> (Select Snum from ORDERS
+    -> group by Snum 
+    -> having Sum(Amt)>3000);
+Query OK, 2 rows affected (0.35 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+
