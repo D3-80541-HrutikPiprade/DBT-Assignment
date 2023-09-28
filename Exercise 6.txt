@@ -1,0 +1,123 @@
+Q1)
+
+select a.Sname, a. Status from S a, S b  where a.Status = b.Status and b.Sname = 'Clark';
++-------+--------+
+| Sname | Status |
++-------+--------+
+| Smith |     20 |
+| Clark |     20 |
++-------+--------+
+2 rows in set (0.28 sec)
+
+Q2)
+
+select a.Ename,a.deptno from emp a, emp b
+    -> where a.deptno=b.deptno and b.Ename= 'MILLER';
++--------+--------+
+| Ename  | deptno |
++--------+--------+
+| CLARK  |     10 |
+| KING   |     10 |
+| MILLER |     10 |
++--------+--------+
+3 rows in set (0.00 sec)
+
+Q3)
+
+select Pname, Weight from P
+    -> where Weight> all
+    -> (select Weight from P 
+    -> where Color= 'Red');
+Empty set (0.27 sec)
+
+Q4)
+
+select a.Jname, a.City from J a, J b
+    -> where a.City = b.City and b.Jname = 'Tape';
++----------+--------+
+| Jname    | City   |
++----------+--------+
+| Collator | London |
+| Tape     | London |
++----------+--------+
+2 rows in set (0.26 sec)
+
+
+
+Q5)
+
+select a.Pname , a.Weight from P a, P b where b.Weight > a.Weight and b.Color ='Green';
++-------+--------+
+| Pname | Weight |
++-------+--------+
+| Nut   |     12 |
+| Screw |     14 |
+| Cam   |     12 |
++-------+--------+
+3 rows in set (0.00 sec)
+
+Q6)
+
+select Sname,Qty from SPJ, S where S.`S#`=SPJ.`S#` and SPJ.Qty =
+ (Select max(Qty) from SPJ);
++-------+------+
+| Sname | Qty  |
++-------+------+
+| Jones |  800 |
+| Adams |  800 |
++-------+------+
+2 rows in set (0.00 sec)
+
+
+Q7)
+
+select ename,sal from emp where sal = (select min(sal) from emp)
+;
++-------+--------+
+| ename | sal    |
++-------+--------+
+| SMITH | 800.00 |
++-------+--------+
+1 row in set (0.00 sec)
+
+
+Q8)
+
+select Sname, Sum(Qty) from SPJ,S 
+where S.`S#`=SPJ.`S#` 
+group by Sname 
+having sum(Qty)= 
+(Select max(Sum_Qty) from 
+(Select Sum(Qty) Sum_Qty from SPJ  
+group by `S#`) abc);
+
++-------+----------+
+| Sname | Sum(Qty) |
++-------+----------+
+| Jones |     3200 |
++-------+----------+
+1 row in set (0.27 sec)
+
+
+Q9)
+
+select dname, count(emp.deptno) COUNT from emp, dept 
+where dept.deptno = emp.deptno 
+group by dname 
+having count(emp.deptno) =
+(select max(Count_dept) from  
+(select count(deptno) Count_dept from emp  
+group by deptno ) acd);
++-------+-------+
+| dname | COUNT |
++-------+-------+
+| SALES |     6 |
++-------+-------+
+1 row in set (0.00 sec)
+
+
+
+
+
+
+
