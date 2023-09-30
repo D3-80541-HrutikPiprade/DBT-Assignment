@@ -1,0 +1,90 @@
+Q1)
+
+delimiter //
+D3_80541_Hrutik>create procedure rectangle(l int, b int)
+    -> begin
+    ->     declare area int;
+    ->     declare perimeter int;
+    ->     set area = l * b ;
+    ->     set perimeter = 2 * (l+b);
+    ->     insert into tempp values(area,'Area');
+    ->     insert into tempp values (perimeter,'Perimeter');
+    -> end; //
+Query OK, 0 rows affected (0.14 sec)
+
+D3_80541_Hrutik>delimiter ;
+D3_80541_Hrutik>call rectangle(10,20);
+Query OK, 1 row affected (0.19 sec)
+
+D3_80541_Hrutik>select * from tempp;
++------+-----------+
+| fir  | sec       |
++------+-----------+
+|  200 | Area      |
+|   60 | Perimeter |
++------+-----------+
+2 rows in set (0.01 sec)
+
+Q2)
+
+create procedure temperature(t int,scale char)
+    -> begin
+    ->     declare temp int;
+    ->     if scale = 'F' then
+    ->         set temp = (t-32) * (5/9);
+    ->         insert into tempp values(temp ,'in Celsius');
+    ->     elseif scale = 'C' then
+    ->         set temp = (9/5) * t + 32;
+    ->         insert into tempp values(temp ,'in Fahrenheit');
+    ->     end if;
+    -> end; //
+Query OK, 0 rows affected (0.14 sec)
+
+D3_80541_Hrutik>delimiter ;
+D3_80541_Hrutik>call temperature(32,'C');
+Query OK, 1 row affected (0.09 sec)
+
+D3_80541_Hrutik>call temperature(101,'F');
+Query OK, 1 row affected (0.32 sec)
+
+D3_80541_Hrutik>select * from tempp;
++------+---------------+
+| fir  | sec           |
++------+---------------+
+|   90 | in Fahrenheit |
+|   38 | in Celsius    |
++------+---------------+
+2 rows in set (0.00 sec)
+
+D3_80541_Hrutik>
+
+Q3)
+
+create procedure divisiblity(n int)
+    -> begin
+    -> 
+    ->     if mod(n,5)=0 then
+    ->         insert into tempp values(n,'Divisible');
+    ->     else
+    ->         insert into tempp values(n,'NOT divisible');
+    ->     end if;
+    -> end; //
+Query OK, 0 rows affected (0.16 sec)
+
+D3_80541_Hrutik>delimiter ;
+D3_80541_Hrutik>call divisiblity(50);
+Query OK, 1 row affected (0.11 sec)
+
+D3_80541_Hrutik>call divisiblity(49);
+Query OK, 1 row affected (0.11 sec)
+
+D3_80541_Hrutik>select * from tempp;
++------+---------------+
+| fir  | sec           |
++------+---------------+
+|   50 | Divisible     |
+|   49 | NOT divisible |
++------+---------------+
+2 rows in set (0.00 sec)
+
+
