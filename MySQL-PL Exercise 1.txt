@@ -88,3 +88,6 @@ D3_80541_Hrutik>select * from tempp;
 2 rows in set (0.00 sec)
 
 
+
+
+
