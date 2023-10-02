@@ -1,0 +1,137 @@
+Q1)
+
+delimiter //
+D3_80541_Hrutik>create procedure print()
+    -> begin 
+    ->     declare x int default 1;
+    ->     while x<1001 do
+    ->         if(mod(x,100)=0) then
+    ->             insert into tempp values (x,'output');
+    ->         end if;
+    ->         set x = x+1;
+    ->     end while;
+    -> end; //
+Query OK, 0 rows affected (0.22 sec)
+
+D3_80541_Hrutik>delimiter ;
+D3_80541_Hrutik>
+D3_80541_Hrutik>call print();
+Query OK, 1 row affected (1.58 sec)
+
+D3_80541_Hrutik>select * from tempp;
++------+--------+
+| fir  | sec    |
++------+--------+
+|  100 | output |
+|  200 | output |
+|  300 | output |
+|  400 | output |
+|  500 | output |
+|  600 | output |
+|  700 | output |
+|  800 | output |
+|  900 | output |
+| 1000 | output |
++------+--------+
+10 rows in set (0.00 sec)
+
+
+Q2)
+
+delimiter //
+D3_80541_Hrutik>create procedure circle()
+    -> begin
+    ->     declare a int default 0;
+    ->     declare b int default 0;
+    ->     declare circum float;
+    ->     declare area float;
+    ->     declare vol float;
+    -> 
+    ->     select min(Num),max(Num) into a , b from R ;
+    -> 
+    ->     cal_loop : loop
+    ->         if a>b then
+    ->             leave cal_loop;
+    ->         end if;
+    -> 
+    ->         set circum = 2* 3.14 * a;
+    ->         set area = 3.14 * a * a;
+    ->         set vol = (4/3) * 3.14 * a * a * a;
+    ->         insert into OUTPUT values ( a, circum, area, vol);
+    ->         set a = a + 1;
+    ->     end loop;
+    -> end; //
+Query OK, 0 rows affected (0.21 sec)
+
+D3_80541_Hrutik>delimiter ;
+D3_80541_Hrutik>
+D3_80541_Hrutik>call circle();
+Query OK, 1 row affected (1.24 sec)
+
+
+D3_80541_Hrutik>select * from OUTPUT;
++--------+---------------+--------+---------+
+| radius | circumference | area   | volume  |
++--------+---------------+--------+---------+
+|      9 |         56.52 | 254.34 | 3052.08 |
+|     10 |          62.8 |    314 | 4186.67 |
+|     11 |         69.08 | 379.94 | 5572.45 |
+|     12 |         75.36 | 452.16 | 7234.56 |
+|     13 |         81.64 | 530.66 | 9198.11 |
+|     14 |         87.92 | 615.44 | 11488.2 |
+|     15 |          94.2 |  706.5 |   14130 |
+|     16 |        100.48 | 803.84 | 17148.6 |
+|     17 |        106.76 | 907.46 | 20569.1 |
++--------+---------------+--------+---------+
+9 rows in set (0.00 sec)
+
+
+Q3)
+
+delimiter //
+D3_80541_Hrutik>create procedure palin()
+    -> begin
+    ->     declare c varchar(15);
+    ->     declare len int ;
+    ->     declare x int default 0;
+    ->     declare flag int default 0;
+    ->     select lower(Name) into  c from N where num =3 ;
+    ->     set len = ceil(length(c)/2);
+    ->     cal_loop : loop
+    ->         if x>len then
+    ->             leave cal_loop;
+    ->         end if;
+    ->         if substr(c,x,1) != substr(c,-x,1) then
+    ->             set flag =1;
+    ->             leave cal_loop;
+    ->         end if;
+    ->         set x=x+1;
+    ->     end loop;
+    ->     if flag=1 then
+    ->         insert into OUTPUT values (c,'NOT PALINDROME');
+    ->     else
+    ->         insert into OUTPUT values (c,'PALINDROME');
+    ->     end if;
+    -> end; //
+Query OK, 0 rows affected (0.18 sec)
+
+D3_80541_Hrutik>delimiter ;
+D3_80541_Hrutik>
+D3_80541_Hrutik>call palin;
+Query OK, 1 row affected (0.10 sec)
+
+D3_80541_Hrutik>select * from OUTPUT;
++-------+----------------+
+| Word  | Result         |
++-------+----------------+
+| level | PALINDROME     |
+| abcde | NOT PALINDROME |
++-------+----------------+
+6 rows in set (0.00 sec)
+
+
+
+
+
+
+

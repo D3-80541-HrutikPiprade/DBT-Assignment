@@ -1,0 +1,118 @@
+Q1)
+
+delimiter //
+D3_80541_Hrutik>create procedure Range1()
+    -> begin
+    ->     declare n int;
+    ->     select Weight into n from P where Pname  = 'Nut';
+    ->     if n between 1 and 20 then
+    ->         insert into tempp values(n,'Within Range');
+    ->     else
+    ->         insert into tempp values(n,'Out of Range');
+    ->     end if;
+    -> end; //
+Query OK, 0 rows affected (0.17 sec)
+
+D3_80541_Hrutik>delimiter ;
+D3_80541_Hrutik>call Range1();
+Query OK, 1 row affected (0.10 sec)
+
+D3_80541_Hrutik>select * from tempp;
++------+--------------+
+| fir  | sec          |
++------+--------------+
+|   12 | Within Range |
++------+--------------+
+1 row in set (0.00 sec)
+
+Q2)
+
+create procedure triangleCheck()
+    -> begin
+    ->     declare s1 int;
+    ->     declare s2 int;
+    ->     declare s3 int;
+    ->     select a,b,c into s1,s2,s3 from triangle where s2= 4;
+    ->     if s1+s2 >s3 then
+    ->         if s1+s3>s2 then
+    ->             if s2+s3>s1 then
+    ->             insert into tempp values (1,"Triangle");
+    ->             else
+    ->             insert into tempp values (0,"NOT Triangle");
+    ->             end if;
+    ->         else
+    ->             insert into tempp values (0,"NOT Triangle");
+    ->         end if;
+    ->     else
+    ->         insert into tempp values (0,"NOT Triangle");    
+    ->     end if;
+    -> end; //
+Query OK, 0 rows affected (0.16 sec)
+
+D3_80541_Hrutik>delimiter ;
+D3_80541_Hrutik>call triangleCheck();
+Query OK, 1 row affected (0.33 sec)
+
+call triangleCheck();
+Query OK, 1 row affected (0.11 sec)
+
+D3_80541_Hrutik>select * from tempp;
++------+--------------+
+| fir  | sec          |
++------+--------------+
+|    0 | NOT Triangle |
++------+--------------+
+1 row in set (0.00 sec)
+
+Q3)
+
+create function isLeap(y int)
+    -> returns boolean
+    -> deterministic
+    -> begin
+    ->     if (mod(y,4)=0 and mod(y,100)!=0) then 
+    ->         return True;
+    ->     elseif (mod(y,4)=0 and mod(y,400)=0) then
+    ->         return True;
+    ->     else 
+    ->         return false;
+    ->     end if;
+    -> end; //
+Query OK, 0 rows affected (0.17 sec)
+
+D3_80541_Hrutik>delimiter ;
+D3_80541_Hrutik>delimiter //
+D3_80541_Hrutik>create procedure leap(x int)
+    -> begin   
+    ->     if isLeap(x) then
+    ->         insert into tempp values (x, 'Leap year');
+    ->     else
+    ->         insert into tempp values (x, 'Not Leap year');
+    ->     end if;
+    -> end; //
+Query OK, 0 rows affected (0.14 sec)
+
+D3_80541_Hrutik>delimiter ;
+D3_80541_Hrutik>call leap(2023);
+Query OK, 1 row affected (0.11 sec)
+
+D3_80541_Hrutik>call Leap(2016);
+Query OK, 1 row affected (0.15 sec)
+
+D3_80541_Hrutik>select * from tempp;
++------+---------------+
+| fir  | sec           |
++------+---------------+
+| 2023 | Not Leap year |
+| 2016 | Leap year     |
++------+---------------+
+2 rows in set (0.00 sec)
+
+
+
+
+
+
+
+
+
